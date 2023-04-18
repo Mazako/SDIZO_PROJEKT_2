@@ -11,5 +11,5 @@ add_subdirectory(src)
 #add_subdirectory(tests)
 
 target_link_libraries( SDIZO_PROJ_2
-        GRAPHS
+        SDIZO_GRAPHS
         )
