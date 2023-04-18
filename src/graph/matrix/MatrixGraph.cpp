@@ -46,3 +46,7 @@ std::string MatrixGraph::toString() {
 bool MatrixGraph::isDirected() {
     return this->directed;
 }
+
+int MatrixGraph::getWeight(int v1, int v2) {
+    return array[v1][v2];
+}
