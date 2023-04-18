@@ -5,7 +5,6 @@
 
 class ListGraph {
     int v;
-    std::vector<
 
 };
 

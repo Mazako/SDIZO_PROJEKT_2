@@ -12,7 +12,7 @@ public:
 
     ~MatrixGraph();
 
-    void addEdge(int v1, int v2, int weight);
+    void addEdge(int v1, int v2, int weight = 1);
 
     std::string toString();
 
