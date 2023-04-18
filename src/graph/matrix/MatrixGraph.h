@@ -6,14 +6,17 @@
 class MatrixGraph {
     int v;
     int **array;
+    bool directed;
 public:
-    MatrixGraph(int v);
+    MatrixGraph(int v, bool directed);
 
     ~MatrixGraph();
 
     void addEdge(int v1, int v2, int weight);
 
     std::string toString();
+
+    bool isDirected();
 };
 
 
