@@ -33,3 +33,11 @@ std::string ListGraph::toString() {
 int ListGraph::getWeight(int v1, int v2) {
     return (*list)[v1][v2].second;
 }
+
+bool ListGraph::isDirected() const {
+    return directed;
+}
+
+int ListGraph::getV() const {
+    return v;
+}

@@ -8,4 +8,4 @@ add_library(SDIZO_GRAPHS
         graph/list/ListGraph.cpp
         graph/list/ListGraph.h
         shortest_path/vertex_addiitional_info/VertexAdditionalInfo.cpp
-        shortest_path/vertex_addiitional_info/VertexAdditionalInfo.h)
+        shortest_path/vertex_addiitional_info/VertexAdditionalInfo.h minimal_spanning_tree/disjoint_node/DisjointNode.cpp minimal_spanning_tree/disjoint_node/DisjointNode.h minimal_spanning_tree/MinimalSpanningTree.cpp minimal_spanning_tree/MinimalSpanningTree.h)

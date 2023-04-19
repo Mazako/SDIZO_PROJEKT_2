@@ -17,6 +17,11 @@ public:
     std::string toString();
 
     int getWeight(int v1, int v2);
+
+    bool isDirected() const;
+
+    int getV() const;
+
 };
 
 
