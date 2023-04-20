@@ -2,6 +2,7 @@
 #define SDIZO_PROJ_2_LISTGRAPH_H
 #include <string>
 #include <vector>
+#include "graph/edge/Edge.h"
 
 class ListGraph {
     int v;
@@ -21,6 +22,8 @@ public:
     bool isDirected() const;
 
     int getV() const;
+
+    std::vector<Edge> getEdges();
 
 };
 

@@ -41,3 +41,17 @@ bool ListGraph::isDirected() const {
 int ListGraph::getV() const {
     return v;
 }
+
+std::vector<Edge> ListGraph::getEdges() {
+    std::vector<Edge> edges;
+    for (int i = 0; i < v; i++) {
+        for (const auto& edge : (*list)[i]) {
+            int v2 = edge.first;
+            int weight = edge.second;
+            if (directed || i < v2) {
+                edges.push_back(Edge(i, v2, weight));
+            }
+        }
+    }
+    return edges;
+}

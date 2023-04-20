@@ -37,4 +37,5 @@ void MinimalSpanningTree::kruskal(ListGraph *listGraph) {
     for (int i = 0; i < listGraph->getV(); i++) {
         disjointSet[i] = makeSet(i);
     }
+
 }
