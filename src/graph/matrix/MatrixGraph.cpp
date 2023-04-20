@@ -50,3 +50,19 @@ bool MatrixGraph::isDirected() {
 int MatrixGraph::getWeight(int v1, int v2) {
     return array[v1][v2];
 }
+
+int MatrixGraph::getV() const {
+    return this->v;
+}
+
+std::vector<Edge> MatrixGraph::getEdges() {
+    std::vector<Edge> edges;
+    for (int i = 0; i < v; i++) {
+        for (int j = directed ? 0 : i; j < v; j++) {
+            if (array[i][j] != INT32_MAX) {
+                edges.push_back(Edge(i, j, array[i][j]));
+            }
+        }
+    }
+    return edges;
+}

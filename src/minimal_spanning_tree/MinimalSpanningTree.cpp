@@ -29,13 +29,28 @@ void MinimalSpanningTree::link(DisjointNode *n1, DisjointNode *n2) {
     }
 }
 
-void MinimalSpanningTree::kruskal(ListGraph *listGraph) {
-    if (listGraph->isDirected()) {
+std::vector<Edge> MinimalSpanningTree::kruskal(ListGraph *graph) {
+    if (graph->isDirected()) {
         throw std::invalid_argument("Graph is directed");
     }
+    return performKruskal(graph->getEdges(), graph->getV());
+
+}
+
+std::vector<Edge> MinimalSpanningTree::performKruskal(std::vector<Edge> edges, int v) {
+    std::vector<Edge> mst;
     std::map<int, DisjointNode*> disjointSet;
-    for (int i = 0; i < listGraph->getV(); i++) {
+    for (int i = 0; i < v; i++) {
         disjointSet[i] = makeSet(i);
     }
-
+    std::sort(edges.begin(), edges.end());
+    for (const Edge &edge : edges) {
+        auto &v1 = disjointSet[edge.getV1()];
+        auto &v2 = disjointSet[edge.getV2()];
+        if (findSet(v1) != findSet(v2)) {
+            unionSet(v1, v2);
+            mst.push_back(edge);
+        }
+    }
+    return mst;
 }

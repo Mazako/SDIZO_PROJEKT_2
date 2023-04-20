@@ -14,6 +14,8 @@ public:
     int getV2() const;
 
     int getWeight() const;
+
+    bool operator<(const Edge &otherEdge) const;
 };
 
 

@@ -2,6 +2,8 @@
 #define SDIZO_PROJEKT_2_MATRIXGRAPH_H
 #include <iostream>
 #include <string>
+#include <vector>
+#include "graph/edge/Edge.h"
 
 class MatrixGraph {
     int v;
@@ -19,6 +21,12 @@ public:
     bool isDirected();
 
     int getWeight(int v1, int v2);
+
+    int getV() const;
+
+    std::vector<Edge> getEdges();
+
+
 };
 
 

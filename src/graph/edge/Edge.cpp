@@ -1,7 +1,3 @@
-//
-// Created by mazak on 20.04.23.
-//
-
 #include "Edge.h"
 
 int Edge::getV1() const {
@@ -17,3 +13,7 @@ int Edge::getWeight() const {
 }
 
 Edge::Edge(int v1, int v2, int weight) : v1(v1), v2(v2), weight(weight) {}
+
+bool Edge::operator<(const Edge &otherEdge) const {
+    return weight < otherEdge.weight;
+}
