@@ -1,6 +1,7 @@
 #ifndef SDIZO_PROJ_2_EDGE_H
 #define SDIZO_PROJ_2_EDGE_H
 
+#include <string>
 
 class Edge {
     int v1;
@@ -16,6 +17,8 @@ public:
     int getWeight() const;
 
     bool operator<(const Edge &otherEdge) const;
+
+    std::string toString() const;
 };
 
 

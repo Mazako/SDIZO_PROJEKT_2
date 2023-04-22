@@ -3,6 +3,7 @@
 
 #include <map>
 #include <algorithm>
+#include <queue>
 #include "graph/list/ListGraph.h"
 #include "graph/matrix/MatrixGraph.h"
 #include "minimal_spanning_tree/disjoint_node/DisjointNode.h"
@@ -18,9 +19,15 @@ class MinimalSpanningTree {
 
     static DisjointNode *findSet(DisjointNode *node);
 
+    static bool compareEdgesByVertices(const Edge &e1, const Edge &e2);
+
 public:
 
     static std::vector<Edge> kruskal(ListGraph *graph);
+
+    static std::vector<Edge> kruskal(MatrixGraph *graph);
+
+    static std::vector<Edge> prim(ListGraph* graph);
 };
 
 
