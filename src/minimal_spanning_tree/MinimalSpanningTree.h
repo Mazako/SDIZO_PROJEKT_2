@@ -7,6 +7,7 @@
 #include "graph/list/ListGraph.h"
 #include "graph/matrix/MatrixGraph.h"
 #include "minimal_spanning_tree/disjoint_node/DisjointNode.h"
+#include "minimal_spanning_tree/prim_vertex/PrimVertex.h"
 
 class MinimalSpanningTree {
     static DisjointNode *makeSet(int key);
@@ -23,11 +24,9 @@ class MinimalSpanningTree {
 
 public:
 
-    static std::vector<Edge> kruskal(ListGraph *graph);
+    static std::vector<Edge> kruskal(Graph *graph);
 
-    static std::vector<Edge> kruskal(MatrixGraph *graph);
-
-    static std::vector<Edge> prim(ListGraph* graph);
+    static std::vector<Edge> prim(Graph* graph, int startingVertex);
 };
 
 

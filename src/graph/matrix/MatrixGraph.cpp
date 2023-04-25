@@ -51,7 +51,7 @@ int MatrixGraph::getWeight(int v1, int v2) {
     return array[v1][v2];
 }
 
-int MatrixGraph::getV() const {
+int MatrixGraph::getV()  {
     return this->v;
 }
 
@@ -60,9 +60,19 @@ std::vector<Edge> MatrixGraph::getEdges() {
     for (int i = 0; i < v; i++) {
         for (int j = directed ? 0 : i; j < v; j++) {
             if (array[i][j] != INT32_MAX) {
-                edges.push_back(Edge(i, j, array[i][j]));
+                edges.emplace_back(i, j, array[i][j]);
             }
         }
     }
     return edges;
+}
+
+std::vector<std::pair<int, int>> MatrixGraph::getNeighbours(int v) {
+    std::vector<std::pair<int, int>> neighbours;
+    for (int i = 0; i < this->v; i++) {
+        if (array[v][i] != INT32_MAX) {
+            neighbours.emplace_back(i, array[v][i]);
+        }
+    }
+    return neighbours;
 }

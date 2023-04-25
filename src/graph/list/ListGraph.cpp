@@ -11,9 +11,9 @@ ListGraph::~ListGraph() {
 }
 
 void ListGraph::addEdge(int v1, int v2, int weight) {
-    (*list)[v1].push_back(std::make_pair(v2, weight));
+    (*list)[v1].emplace_back(v2, weight);
     if (!directed) {
-        (*list)[v2].push_back(std::make_pair(v1, weight));
+        (*list)[v2].emplace_back(v1, weight);
     }
 }
 
@@ -31,14 +31,20 @@ std::string ListGraph::toString() {
 }
 
 int ListGraph::getWeight(int v1, int v2) {
-    return (*list)[v1][v2].second;
+    auto neighbours = (*list)[v1];
+    for (auto &n : neighbours) {
+        if (v2 == n.first) {
+            return n.second;
+        }
+    }
+    throw;
 }
 
-bool ListGraph::isDirected() const {
+bool ListGraph::isDirected()  {
     return directed;
 }
 
-int ListGraph::getV() const {
+int ListGraph::getV() {
     return v;
 }
 
@@ -54,4 +60,8 @@ std::vector<Edge> ListGraph::getEdges() {
         }
     }
     return edges;
+}
+
+std::vector<std::pair<int, int>> ListGraph::getNeighbours(int v) {
+    return (*list)[v];
 }

@@ -29,19 +29,12 @@ void MinimalSpanningTree::link(DisjointNode *n1, DisjointNode *n2) {
     }
 }
 
-std::vector<Edge> MinimalSpanningTree::kruskal(ListGraph *graph) {
+std::vector<Edge> MinimalSpanningTree::kruskal(Graph *graph) {
     if (graph->isDirected()) {
         throw std::invalid_argument("Graph is directed");
     }
     return performKruskal(graph->getEdges(), graph->getV());
 
-}
-
-std::vector<Edge> MinimalSpanningTree::kruskal(MatrixGraph *graph) {
-    if (graph->isDirected()) {
-        throw std::invalid_argument("Graph is directed");
-    }
-    return performKruskal(graph->getEdges(), graph->getV());
 }
 
 std::vector<Edge> MinimalSpanningTree::performKruskal(std::vector<Edge> edges, int v) {
@@ -70,13 +63,41 @@ bool MinimalSpanningTree::compareEdgesByVertices(const Edge &e1, const Edge &e2)
     return e1.getV1() < e2.getV1();
 }
 
-std::vector<Edge> MinimalSpanningTree::prim(ListGraph *graph) {
-    auto keyComparator = [](const std::pair<int, int> &v1, const std::pair<int, int> &v2) {
-        return v1.second > v2.second;
-    };
-    int* parent = new int [graph->getV()];
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int,int>>, decltype(keyComparator)> queue(keyComparator);
-
-
+std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
+    std::vector<int> parents(graph->getV());
+    std::vector<PrimVertex> keySet;
+    std::vector<bool> visited(graph->getV());
+    for (int i = 0 ; i < graph -> getV(); i++) {
+        parents[i] = -1;
+        visited[i] = false;
+        if (i == startingVertex) {
+            keySet.emplace_back(i, 0);
+        } else {
+            keySet.emplace_back(i, INT32_MAX);
+        }
+    }
+    std::vector<Edge> mst;
+    while(!keySet.empty()) {
+        auto minElement = std::min_element(keySet.begin(), keySet.end(), [](PrimVertex &a, PrimVertex&b) {
+            return a.getKey() < b.getKey();
+        });
+        for (auto &neighbour: graph->getNeighbours(minElement->getV())) {
+            auto neighbourKey = std::find_if(keySet.begin(), keySet.end(), [&neighbour](PrimVertex &a) {
+                return a.getV() == neighbour.first;
+            });
+            if (neighbourKey->getV() != minElement->getV() && neighbourKey != keySet.end() && neighbour.second < neighbourKey->getKey()) {
+                parents[neighbour.first] = minElement->getV();
+                neighbourKey->setKey(neighbour.second);
+            }
+        }
+        keySet.erase(minElement);
+    }
+    for (int i = 0; i < graph->getV(); i++) {
+        if (parents[i] != -1) {
+            mst.emplace_back(parents[i], i, graph->getWeight(parents[i], i));
+        }
+    }
+    std::sort(mst.begin(), mst.end(), compareEdgesByVertices);
+    return mst;
 }
 

@@ -7,7 +7,7 @@
 int main() {
     using namespace std;
     cout << "Projekt 2" << endl;
-    auto* g = new ListGraph(8, false);
+    Graph* g = new MatrixGraph(8, false);
     g->addEdge(0, 2, 9);
     g->addEdge(2, 4, 3);
     g->addEdge(2, 1, 5);
@@ -16,8 +16,20 @@ int main() {
     g->addEdge(1, 5, 2);
     g->addEdge(5, 7, 6);
     g->addEdge(7, 6, 6);
-    auto mst = MinimalSpanningTree::kruskal(g);
+    cout << g->toString() << endl;
+    cout << "PRIM" << endl;
+    int primTotal = 0, kruskalTotal = 0;
+    auto mst = MinimalSpanningTree::prim(g, 0);
     for (const auto &e : mst) {
+        primTotal += e.getWeight();
         cout << e.toString() << endl;
     }
+    cout << "KRUSKAL" << endl;
+    auto kruskal = MinimalSpanningTree::kruskal(g);
+    for (const auto &e : kruskal) {
+        cout << e.toString() << endl;
+        kruskalTotal += e.getWeight();
+    }
+    cout << primTotal << endl;
+    cout << kruskalTotal << endl;
 }

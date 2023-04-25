@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 #include "graph/edge/Edge.h"
+#include "graph/Graph.h"
 
-class ListGraph {
+class ListGraph : public Graph{
     int v;
     std::vector<std::vector<std::pair<int, int>>>* list;
     bool directed;
@@ -13,17 +14,20 @@ public:
 
     ~ListGraph();
 
-    void addEdge(int v1, int v2, int weight = 1);
+    void addEdge(int v1, int v2, int weight) override;
 
-    std::string toString();
+    std::string toString() override;
 
-    int getWeight(int v1, int v2);
+    int getWeight(int v1, int v2) override;
 
-    bool isDirected() const;
+    bool isDirected() override;
 
-    int getV() const;
+    int getV() override;
 
-    std::vector<Edge> getEdges();
+    std::vector<std::pair<int, int>> getNeighbours(int v) override;
+
+    std::vector<Edge> getEdges() override;
+
 
 };
 
