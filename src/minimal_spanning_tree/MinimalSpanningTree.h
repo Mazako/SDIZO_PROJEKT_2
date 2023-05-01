@@ -4,6 +4,8 @@
 #include <map>
 #include <algorithm>
 #include <queue>
+#include <fstream>
+#include <sstream>
 #include "graph/list/ListGraph.h"
 #include "graph/matrix/MatrixGraph.h"
 #include "minimal_spanning_tree/disjoint_node/DisjointNode.h"

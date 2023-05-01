@@ -101,3 +101,17 @@ std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
     return mst;
 }
 
+std::pair<Graph*, Graph*> readGraphFromFile(std::string &filename) {
+    using namespace std;
+    string line;
+    fstream newFile;
+    newFile.open(filename, ios::in);
+    getline(newFile, line);
+    if (line.empty()) {
+        throw std::invalid_argument("Bad file format");
+    }
+    stringstream stream(line);
+    int edges, vertices, startingVertex;
+
+}
+

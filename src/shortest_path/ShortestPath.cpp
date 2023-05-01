@@ -43,3 +43,47 @@ std::pair<std::vector<int>, std::vector<int>> ShortestPath::bellmanFord(Graph *g
 
 
 }
+
+std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex) {
+    auto comparator = [](DjikstraVertex &v1, DjikstraVertex &v2) {
+        return v1.getDistance() < v2.getDistance();
+    };
+    if (!g->isDirected()) {
+        throw std::invalid_argument("Graph is not directed");
+    }
+    auto vectors = initializeGraph(g, startingVertex);
+    std::vector<int> &parents = vectors.first;
+    std::vector<int> &distances = vectors.second;
+    std::priority_queue<DjikstraVertex, std::vector<DjikstraVertex>, decltype(comparator)> queue(comparator);
+    for (int i = 0; i < g->getV(); i++) {
+        queue.emplace(i, distances[i]);
+    }
+    while (!queue.empty()) {
+        auto u = queue.top();
+        queue.pop();
+        for(auto &neighbour : g->getNeighbours(u.getV())) {
+            relax(g, u.getV(), neighbour.first, distances, parents);
+        }
+    }
+    std::vector<ShortestPathDTO> result;
+    for (int i = 0; i < g->getV(); i++) {
+        if (parents[i] != -1) {
+            result.emplace_back(startingVertex, i, distances[i], calculateShortestPath(i, parents));
+        }
+    }
+    std::sort(result.begin(), result.end(), [](ShortestPathDTO& v1, ShortestPathDTO &v2){
+        return v1.getAnEnd() > v2.getAnEnd();
+    });
+
+    return result;
+
+}
+
+std::vector<int> ShortestPath::calculateShortestPath(int i, std::vector<int> &parents) {
+    std::vector<int> shortestPath;
+    while (i != -1) {
+        shortestPath.emplace_back(i);
+        i = parents[i];
+    }
+    return shortestPath;
+}

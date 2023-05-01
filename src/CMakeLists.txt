@@ -16,4 +16,4 @@ add_library(SDIZO_GRAPHS
         minimal_spanning_tree/prim_vertex/PrimVertex.cpp
         minimal_spanning_tree/prim_vertex/PrimVertex.h
         graph/Graph.cpp
-        graph/Graph.h shortest_path/ShortestPath.cpp shortest_path/ShortestPath.h shortest_path/ShortestPath.h shortest_path/ShortestPath.cpp shortest_path/shortest_path_dto/ShortestPathDTO.cpp shortest_path/shortest_path_dto/ShortestPathDTO.h)
+        graph/Graph.h shortest_path/ShortestPath.cpp shortest_path/ShortestPath.h shortest_path/ShortestPath.h shortest_path/ShortestPath.cpp shortest_path/shortest_path_dto/ShortestPathDTO.cpp shortest_path/shortest_path_dto/ShortestPathDTO.h shortest_path/djikstra_vertex/DjikstraVertex.cpp shortest_path/djikstra_vertex/DjikstraVertex.h)
