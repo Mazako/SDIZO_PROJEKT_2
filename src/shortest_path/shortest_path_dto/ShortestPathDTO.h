@@ -21,6 +21,8 @@ public:
     int getDistance() const;
 
     const std::vector<int> &getPath() const;
+
+    std::string toString();
 };
 
 

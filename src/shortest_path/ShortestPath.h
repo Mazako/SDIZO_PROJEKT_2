@@ -9,16 +9,17 @@
 #include "shortest_path/djikstra_vertex/DjikstraVertex.h"
 
 class ShortestPath {
+private:
     static std::pair<std::vector<int>, std::vector<int>> initializeGraph(Graph *g, int startingVertex);
 
     static bool relax(Graph *g, int v1, int v2, std::vector<int> &distances, std::vector<int> &parents);
 
+    static std::vector<int> calculateShortestPath(int i, std::vector<int> &vector);
 public:
-    static std::pair<std::vector<int>, std::vector<int>> bellmanFord(Graph *g, int startingVertex);
+
+    static std::vector<ShortestPathDTO> bellmanFord(Graph *g, int startingVertex);
 
     static std::vector<ShortestPathDTO> djikstra(Graph *g, int startingVertex);
-
-    static std::vector<int> calculateShortestPath(int i, std::vector<int> &vector);
 };
 
 

@@ -1,10 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "graph/matrix/MatrixGraph.h"
-#include "graph/list/ListGraph.h"
-#include "minimal_spanning_tree/MinimalSpanningTree.h"
-#include "shortest_path/ShortestPath.h"
 #include "minimal_spanning_tree/client/MstClient.h"
+#include "shortest_path/client/ShortestPathClient.h"
 
 void printMenu();
 
@@ -48,5 +45,7 @@ void mstClient() {
 }
 
 void shortestPathClient() {
-
+    auto *client = new ShortestPathClient();
+    client->start();
+    delete client;
 }

@@ -20,3 +20,12 @@ ShortestPathDTO::ShortestPathDTO(int start, int anEnd, int distance, const std::
                                                                                                      end(anEnd),
                                                                                                      distance(distance),
                                                                                                      path(path) {}
+
+std::string ShortestPathDTO::toString() {
+    std::string str;
+    str += std::to_string(end) + " | " + std::to_string(distance) + " | ";
+    for (auto &vertex : path) {
+        str += std::to_string(vertex) + " ";
+    }
+    return str;
+}

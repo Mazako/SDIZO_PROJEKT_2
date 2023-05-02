@@ -9,7 +9,7 @@
 class MstClient {
     ListGraph *list;
     MatrixGraph *matrix;
-    int selectedElement;
+    int startingVertex;
 
     void printMenuItems();
 

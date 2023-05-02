@@ -24,6 +24,9 @@ std::tuple<Graph *, Graph *, int> Graph::readGraphFromFile(std::string &filename
         int v1, v2, weight;
         edgeStream >> v1;
         edgeStream >> v2;
+        if (v1 >= vertices || v2 >= vertices) {
+            throw std::invalid_argument("Bad file format");
+        }
         edgeStream >> weight;
         list->addEdge(v1, v2, weight);
         matrix->addEdge(v1, v2, weight);

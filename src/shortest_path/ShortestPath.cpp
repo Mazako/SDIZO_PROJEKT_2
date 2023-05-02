@@ -28,7 +28,7 @@ std::pair<std::vector<int>, std::vector<int>> ShortestPath::initializeGraph(Grap
     return parentsAndDistances;
 }
 
-std::pair<std::vector<int>, std::vector<int>> ShortestPath::bellmanFord(Graph *g, int startingVertex) {
+std::vector<ShortestPathDTO> ShortestPath::bellmanFord(Graph *g, int startingVertex) {
     if (!g->isDirected()) {
         throw std::invalid_argument("Graph is not directed");
     }
@@ -46,7 +46,13 @@ std::pair<std::vector<int>, std::vector<int>> ShortestPath::bellmanFord(Graph *g
             throw std::invalid_argument("Graph has negative weighted cycles");
         }
     }
-    return vectors;
+    std::vector<ShortestPathDTO> result;
+    for (int i = 0; i < g->getV(); i++) {
+        if (parents[i] != -1) {
+            result.emplace_back(startingVertex, i, distances[i], calculateShortestPath(i, parents));
+        }
+    }
+    return result;
 }
 
 std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex) {
@@ -83,10 +89,6 @@ std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex
             result.emplace_back(startingVertex, i, distances[i], calculateShortestPath(i, parents));
         }
     }
-    std::sort(result.begin(), result.end(), [](ShortestPathDTO &v1, ShortestPathDTO &v2) {
-        return v1.getAnEnd() > v2.getAnEnd();
-    });
-
     return result;
 
 }
