@@ -12,6 +12,8 @@ public:
     int getV() const;
 
     int getDistance() const;
+
+    void setDistance(int distance);
 };
 
 

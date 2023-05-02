@@ -1,11 +1,18 @@
 #include "ShortestPath.h"
 
-void ShortestPath::relax(Graph *g, int v1, int v2, std::vector<int> &distances, std::vector<int> &parents) {
-    int possibleNewDistance = distances[v1] + g->getWeight(v1, v2);
+bool ShortestPath::relax(Graph *g, int v1, int v2, std::vector<int> &distances, std::vector<int> &parents) {
+    int possibleNewDistance;
+    if (distances[v1] == INT32_MAX) {
+        possibleNewDistance = INT32_MAX;
+    } else {
+        possibleNewDistance = distances[v1] + g->getWeight(v1, v2);
+    }
     if (distances[v2] > possibleNewDistance) {
         distances[v2] = possibleNewDistance;
         parents[v2] = v1;
+        return true;
     }
+    return false;
 }
 
 std::pair<std::vector<int>, std::vector<int>> ShortestPath::initializeGraph(Graph *g, int startingVertex) {
@@ -30,18 +37,16 @@ std::pair<std::vector<int>, std::vector<int>> ShortestPath::bellmanFord(Graph *g
     std::vector<int> &distances = vectors.second;
     std::vector<Edge> edges = g->getEdges();
     for (int i = 1; i <= g->getV(); i++) {
-        for (auto &edge : edges) {
+        for (auto &edge: edges) {
             relax(g, edge.getV1(), edge.getV2(), distances, parents);
         }
     }
-    for (auto &edge : edges) {
+    for (auto &edge: edges) {
         if (distances[edge.getV2()] > distances[edge.getV1()] + edge.getWeight()) {
             throw std::invalid_argument("Graph has negative weighted cycles");
         }
     }
     return vectors;
-
-
 }
 
 std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex) {
@@ -54,16 +59,23 @@ std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex
     auto vectors = initializeGraph(g, startingVertex);
     std::vector<int> &parents = vectors.first;
     std::vector<int> &distances = vectors.second;
-    std::priority_queue<DjikstraVertex, std::vector<DjikstraVertex>, decltype(comparator)> queue(comparator);
+    std::vector<DjikstraVertex> vertices;
+    vertices.reserve(g->getV());
     for (int i = 0; i < g->getV(); i++) {
-        queue.emplace(i, distances[i]);
+        vertices.emplace_back(i, distances[i]);
     }
-    while (!queue.empty()) {
-        auto u = queue.top();
-        queue.pop();
-        for(auto &neighbour : g->getNeighbours(u.getV())) {
-            relax(g, u.getV(), neighbour.first, distances, parents);
+    while (!vertices.empty()) {
+        auto u = std::min_element(vertices.begin(), vertices.end(), comparator);
+        for (auto &neighbour: g->getNeighbours(u->getV())) {
+            bool isRelaxed = relax(g, u->getV(), neighbour.first, distances, parents);
+            if (isRelaxed) {
+                auto djikstraVertex = std::find_if(vertices.begin(), vertices.end(), [&neighbour](DjikstraVertex &v) {
+                    return v.getV() == neighbour.first;
+                });
+                djikstraVertex->setDistance(u->getDistance() + neighbour.second);
+            }
         }
+        vertices.erase(u);
     }
     std::vector<ShortestPathDTO> result;
     for (int i = 0; i < g->getV(); i++) {
@@ -71,7 +83,7 @@ std::vector<ShortestPathDTO> ShortestPath::djikstra(Graph *g, int startingVertex
             result.emplace_back(startingVertex, i, distances[i], calculateShortestPath(i, parents));
         }
     }
-    std::sort(result.begin(), result.end(), [](ShortestPathDTO& v1, ShortestPathDTO &v2){
+    std::sort(result.begin(), result.end(), [](ShortestPathDTO &v1, ShortestPathDTO &v2) {
         return v1.getAnEnd() > v2.getAnEnd();
     });
 

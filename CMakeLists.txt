@@ -10,6 +10,6 @@ include_directories(src)
 add_subdirectory(src)
 #add_subdirectory(tests)
 
-target_link_libraries( SDIZO_PROJ_2
+target_link_libraries(SDIZO_PROJ_2
         SDIZO_GRAPHS
         )

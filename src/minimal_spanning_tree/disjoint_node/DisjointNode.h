@@ -4,7 +4,7 @@
 
 class DisjointNode {
     int value;
-    DisjointNode* parent;
+    DisjointNode *parent;
     int rank;
 public:
     DisjointNode(int value);

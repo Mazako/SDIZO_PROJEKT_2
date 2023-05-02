@@ -1,10 +1,11 @@
 #include "MatrixGraph.h"
+
 MatrixGraph::MatrixGraph(int v, bool directed) {
     this->v = v;
     this->directed = directed;
-    this->array = new int* [v];
+    this->array = new int *[v];
     for (int i = 0; i < v; i++) {
-        this->array[i] = new int [v];
+        this->array[i] = new int[v];
         for (int j = 0; j < v; j++) {
             this->array[i][j] = INT32_MAX;
         }
@@ -15,7 +16,7 @@ MatrixGraph::~MatrixGraph() {
     for (int i = 0; i < v; i++) {
         delete[] this->array[i];
     }
-    delete [] this->array;
+    delete[] this->array;
 }
 
 void MatrixGraph::addEdge(int v1, int v2, int weight) {
@@ -51,7 +52,7 @@ int MatrixGraph::getWeight(int v1, int v2) {
     return array[v1][v2];
 }
 
-int MatrixGraph::getV()  {
+int MatrixGraph::getV() {
     return this->v;
 }
 

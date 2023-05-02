@@ -1,8 +1,10 @@
 #ifndef SDIZO_PROJ_2_SHORTESTPATHDTO_H
 #define SDIZO_PROJ_2_SHORTESTPATHDTO_H
+
 #include <vector>
 #include <string>
 #include <stdexcept>
+
 class ShortestPathDTO {
 private:
     int start;

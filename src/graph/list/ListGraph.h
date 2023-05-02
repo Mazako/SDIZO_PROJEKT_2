@@ -1,13 +1,14 @@
 #ifndef SDIZO_PROJ_2_LISTGRAPH_H
 #define SDIZO_PROJ_2_LISTGRAPH_H
+
 #include <string>
 #include <vector>
 #include "graph/edge/Edge.h"
 #include "graph/Graph.h"
 
-class ListGraph : public Graph{
+class ListGraph : public Graph {
     int v;
-    std::vector<std::vector<std::pair<int, int>>>* list;
+    std::vector<std::vector<std::pair<int, int>>> *list;
     bool directed;
 public:
     ListGraph(int v, bool directed);

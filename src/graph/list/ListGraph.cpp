@@ -22,7 +22,7 @@ std::string ListGraph::toString() {
     string graph = "";
     for (int i = 0; i < v; i++) {
         graph += std::to_string(i) + " -> { ";
-        for (const auto &edge : (*list)[i]) {
+        for (const auto &edge: (*list)[i]) {
             graph += std::to_string(edge.first) + "(" + std::to_string(edge.second) + ") ";
         }
         graph += "}\n";
@@ -32,7 +32,7 @@ std::string ListGraph::toString() {
 
 int ListGraph::getWeight(int v1, int v2) {
     auto neighbours = (*list)[v1];
-    for (auto &n : neighbours) {
+    for (auto &n: neighbours) {
         if (v2 == n.first) {
             return n.second;
         }
@@ -40,7 +40,7 @@ int ListGraph::getWeight(int v1, int v2) {
     throw;
 }
 
-bool ListGraph::isDirected()  {
+bool ListGraph::isDirected() {
     return directed;
 }
 
@@ -51,7 +51,7 @@ int ListGraph::getV() {
 std::vector<Edge> ListGraph::getEdges() {
     std::vector<Edge> edges;
     for (int i = 0; i < v; i++) {
-        for (const auto& edge : (*list)[i]) {
+        for (const auto &edge: (*list)[i]) {
             int v2 = edge.first;
             int weight = edge.second;
             if (directed || i < v2) {

@@ -22,13 +22,13 @@ class MinimalSpanningTree {
 
     static DisjointNode *findSet(DisjointNode *node);
 
-    static bool compareEdgesByVertices(const Edge &e1, const Edge &e2);
-
 public:
 
     static std::vector<Edge> kruskal(Graph *graph);
 
-    static std::vector<Edge> prim(Graph* graph, int startingVertex);
+    static bool compareEdgesByVertices(const Edge &e1, const Edge &e2);
+
+    static std::vector<Edge> prim(Graph *graph, int startingVertex);
 };
 
 

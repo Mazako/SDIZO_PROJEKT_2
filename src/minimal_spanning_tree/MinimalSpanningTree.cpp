@@ -1,10 +1,10 @@
 #include "MinimalSpanningTree.h"
 
 DisjointNode *MinimalSpanningTree::makeSet(int key) {
-        auto *node = new DisjointNode(key);
-        node->setParent(node);
-        node->setRank(0);
-        return node;
+    auto *node = new DisjointNode(key);
+    node->setParent(node);
+    node->setRank(0);
+    return node;
 }
 
 DisjointNode *MinimalSpanningTree::findSet(DisjointNode *node) {
@@ -39,12 +39,12 @@ std::vector<Edge> MinimalSpanningTree::kruskal(Graph *graph) {
 
 std::vector<Edge> MinimalSpanningTree::performKruskal(std::vector<Edge> edges, int v) {
     std::vector<Edge> mst;
-    std::map<int, DisjointNode*> disjointSet;
+    std::map<int, DisjointNode *> disjointSet;
     for (int i = 0; i < v; i++) {
         disjointSet[i] = makeSet(i);
     }
     std::sort(edges.begin(), edges.end());
-    for (const Edge &edge : edges) {
+    for (const Edge &edge: edges) {
         auto &v1 = disjointSet[edge.getV1()];
         auto &v2 = disjointSet[edge.getV2()];
         if (findSet(v1) != findSet(v2)) {
@@ -52,7 +52,6 @@ std::vector<Edge> MinimalSpanningTree::performKruskal(std::vector<Edge> edges, i
             mst.push_back(edge);
         }
     }
-    std::sort(mst.begin(), mst.end(), compareEdgesByVertices);
     return mst;
 }
 
@@ -67,7 +66,7 @@ std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
     std::vector<int> parents(graph->getV());
     std::vector<PrimVertex> keySet;
     std::vector<bool> visited(graph->getV());
-    for (int i = 0 ; i < graph -> getV(); i++) {
+    for (int i = 0; i < graph->getV(); i++) {
         parents[i] = -1;
         visited[i] = false;
         if (i == startingVertex) {
@@ -77,15 +76,16 @@ std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
         }
     }
     std::vector<Edge> mst;
-    while(!keySet.empty()) {
-        auto minElement = std::min_element(keySet.begin(), keySet.end(), [](PrimVertex &a, PrimVertex&b) {
+    while (!keySet.empty()) {
+        auto minElement = std::min_element(keySet.begin(), keySet.end(), [](PrimVertex &a, PrimVertex &b) {
             return a.getKey() < b.getKey();
         });
         for (auto &neighbour: graph->getNeighbours(minElement->getV())) {
             auto neighbourKey = std::find_if(keySet.begin(), keySet.end(), [&neighbour](PrimVertex &a) {
                 return a.getV() == neighbour.first;
             });
-            if (neighbourKey->getV() != minElement->getV() && neighbourKey != keySet.end() && neighbour.second < neighbourKey->getKey()) {
+            if (neighbourKey->getV() != minElement->getV() && neighbourKey != keySet.end() &&
+                neighbour.second < neighbourKey->getKey()) {
                 parents[neighbour.first] = minElement->getV();
                 neighbourKey->setKey(neighbour.second);
             }
@@ -100,18 +100,3 @@ std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
     std::sort(mst.begin(), mst.end(), compareEdgesByVertices);
     return mst;
 }
-
-std::pair<Graph*, Graph*> readGraphFromFile(std::string &filename) {
-    using namespace std;
-    string line;
-    fstream newFile;
-    newFile.open(filename, ios::in);
-    getline(newFile, line);
-    if (line.empty()) {
-        throw std::invalid_argument("Bad file format");
-    }
-    stringstream stream(line);
-    int edges, vertices, startingVertex;
-
-}
-
