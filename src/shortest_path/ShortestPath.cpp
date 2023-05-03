@@ -36,7 +36,7 @@ std::vector<ShortestPathDTO> ShortestPath::bellmanFord(Graph *g, int startingVer
     std::vector<int> &parents = vectors.first;
     std::vector<int> &distances = vectors.second;
     std::vector<Edge> edges = g->getEdges();
-    for (int i = 1; i <= g->getV(); i++) {
+    for (int i = 1; i <= g->getV() + 2; i++) {
         for (auto &edge: edges) {
             relax(g, edge.getV1(), edge.getV2(), distances, parents);
         }
