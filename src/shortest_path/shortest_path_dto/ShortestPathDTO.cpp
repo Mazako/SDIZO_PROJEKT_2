@@ -29,3 +29,14 @@ std::string ShortestPathDTO::toString() {
     }
     return str;
 }
+
+bool ShortestPathDTO::operator==(const ShortestPathDTO &rhs) const {
+    return start == rhs.start &&
+           end == rhs.end &&
+           distance == rhs.distance &&
+           path == rhs.path;
+}
+
+bool ShortestPathDTO::operator!=(const ShortestPathDTO &rhs) const {
+    return !(rhs == *this);
+}

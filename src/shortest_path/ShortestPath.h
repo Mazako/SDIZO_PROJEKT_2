@@ -20,6 +20,8 @@ public:
     static std::vector<ShortestPathDTO> bellmanFord(Graph *g, int startingVertex);
 
     static std::vector<ShortestPathDTO> djikstra(Graph *g, int startingVertex);
+
+
 };
 
 

@@ -23,6 +23,10 @@ public:
     const std::vector<int> &getPath() const;
 
     std::string toString();
+
+    bool operator==(const ShortestPathDTO &rhs) const;
+
+    bool operator!=(const ShortestPathDTO &rhs) const;
 };
 
 

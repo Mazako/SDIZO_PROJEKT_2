@@ -59,7 +59,7 @@ int MatrixGraph::getV() {
 std::vector<Edge> MatrixGraph::getEdges() {
     std::vector<Edge> edges;
     for (int i = 0; i < v; i++) {
-        for (int j = directed ? 0 : i; j < v; j++) {
+        for (int j = 0; j < v; j++) {
             if (array[i][j] != INT32_MAX) {
                 edges.emplace_back(i, j, array[i][j]);
             }

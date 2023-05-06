@@ -54,9 +54,7 @@ std::vector<Edge> ListGraph::getEdges() {
         for (const auto &edge: (*list)[i]) {
             int v2 = edge.first;
             int weight = edge.second;
-            if (directed || i < v2) {
-                edges.push_back(Edge(i, v2, weight));
-            }
+            edges.push_back(Edge(i, v2, weight));
         }
     }
     return edges;
