@@ -8,7 +8,7 @@ add_executable(SDIZO_PROJ_2 ${SOURCE_FILES})
 include_directories(src)
 
 add_subdirectory(src)
-#add_subdirectory(tests)
+add_subdirectory(tests)
 
 target_link_libraries(SDIZO_PROJ_2
         SDIZO_GRAPHS

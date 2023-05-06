@@ -7,7 +7,7 @@
 
 class TestPerformer {
     static inline const std::vector<int> DENSITIES{25, 50, 75, 99};
-    static inline const std::vector<int> VERTICES{25, 50}; //100, 200, 500};
+    static inline const std::vector<int> VERTICES{10, 25 ,50, 75, 100};
 
     static std::pair<long, long> singleDjikstraTest(int density, int vertices);
 

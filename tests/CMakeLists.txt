@@ -1,0 +1,6 @@
+project(tests)
+add_subdirectory(googletest-1.13.0)
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+add_executable(test_run djikstraTest.cpp)
+target_link_libraries(test_run SDIZO_GRAPHS)
+target_link_libraries(test_run gtest gtest_main)

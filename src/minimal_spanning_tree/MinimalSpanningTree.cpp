@@ -97,6 +97,5 @@ std::vector<Edge> MinimalSpanningTree::prim(Graph *graph, int startingVertex) {
             mst.emplace_back(parents[i], i, graph->getWeight(parents[i], i));
         }
     }
-    std::sort(mst.begin(), mst.end(), compareEdgesByVertices);
     return mst;
 }

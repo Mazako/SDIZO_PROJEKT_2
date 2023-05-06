@@ -42,7 +42,7 @@ std::vector<ShortestPathDTO> ShortestPath::bellmanFord(Graph *g, int startingVer
         }
     }
     for (auto &edge: edges) {
-        if (distances[edge.getV2()] > distances[edge.getV1()] + edge.getWeight()) {
+        if (distances[edge.getV1()] != INT32_MAX && distances[edge.getV2()] > distances[edge.getV1()] + edge.getWeight()) {
             throw std::invalid_argument("Graph has negative weighted cycles");
         }
     }
